@@ -1,0 +1,36 @@
+
+<h2>Lista de Produtos</h2>
+
+<?php if (isset($this->messages) && count($this->messages)): ?>
+<ul id="messages">
+    <?php foreach ($this->messages as $message): ?>
+    <li><?= $message ?></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+
+<p>
+    <a href="<?= $this->baseUrl('produtos/novo') ?>">Novo produto</a>
+</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th><th>Imagem</th><th>Nome</th><th>Preço</th>
+            <th>Detalhes</th><th>Editar</th><th>Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->produtos as $produto): ?>
+        <tr>
+            <td><?= $produto->id_produto ?></td>
+            <td><img height="50" src="<?= $this->baseUrl('imagens/'.$produto->imagem) ?>" /></td>
+            <td><?= $this->escape($produto->nome) ?></td>
+            <td>R$ <?= number_format($produto->preco, 2, ',', '.') ?></td>
+            <td><a href="<?= $this->baseUrl('produtos/ver/id/'.$produto->id_produto) ?>">ver</a></td>
+            <td><a href="<?= $this->baseUrl('produtos/editar/id/'.$produto->id_produto) ?>">editar</a></td>
+            <td><a href="<?= $this->baseUrl('produtos/excluir/id/'.$produto->id_produto) ?>">excluir</a></td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

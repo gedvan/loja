@@ -1,0 +1,39 @@
+
+<h2>Lista de Usuários</h2>
+
+<?php if (isset($this->messages) && count($this->messages)): ?>
+<ul id="messages">
+    <?php foreach ($this->messages as $message): ?>
+    <li><?= $message ?></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+
+<p>
+    <a href="<?= $this->baseUrl('usuarios/novo') ?>">Novo usuário</a>
+</p>
+
+<table border="1" id="lista-usuarios">
+    <thead>
+        <tr>
+            <th>ID</th><th>Nome</th><th>Login</th><th>Data de criação</th>
+            <th>Papel</th><th>Ativo</th><th>Editar</th><th>Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->usuarios as $usuario): ?>
+        <tr>
+            <td class="id"><?= $usuario->id_usuario ?></td>
+            <td class="nome"><?= $this->escape($usuario->nome) ?></td>
+            <td><?= $this->escape($usuario->login) ?></td>
+            <td><?= date('d/m/Y H:i:s', strtotime($usuario->data_cadastro)) ?></td>
+            <td><?= $usuario->papel ?></td>
+            <td class="ativo"><a href="#" id="ativo-<?= $usuario->id_usuario ?>"><?= $usuario->ativo ? 'Sim' : 'Não' ?></a></td>
+            <td><a href="<?= $this->baseUrl('usuarios/editar/id/'.$usuario->id_usuario) ?>">editar</a></td>
+            <td><a href="<?= $this->baseUrl('usuarios/excluir/id/'.$usuario->id_usuario) ?>">excluir</a></td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<div id="detalhes"></div>

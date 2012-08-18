@@ -1,0 +1,28 @@
+<?= $this->doctype() ?> 
+<html>
+    <head>
+        <?= $this->headTitle() ?>
+        <?= $this->headMeta() ?>
+        <? $this->headLink()->appendStylesheet($this->baseUrl('js/jquery.ui/css/ui-lightness/jquery-ui-1.8.23.custom.css')) ?>
+        <?= $this->headLink() ?>
+        <?= $this->headScript() ?>
+        <script>
+            var baseUrl = '<?= $this->baseUrl() ?>';
+        </script>
+    </head>
+    <body>
+        
+        <h1>Zend Store - Administração</h1>
+        
+        <ul id="menu">
+            <li><a href="<?= $this->baseUrl() ?>">Página Inicial</a></li>
+            <li><a href="<?= $this->baseUrl('usuarios') ?>">Usuários</a></li>
+            <?php if (Zend_Auth::getInstance()->hasIdentity()): ?>
+            <li><a href="<?= $this->baseUrl('usuarios/sair') ?>">Sair</a></li>
+            <?php endif ?>
+        </ul>
+        
+        <?= $this->layout()->content; ?>
+        
+    </body>
+</html>

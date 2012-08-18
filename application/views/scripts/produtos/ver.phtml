@@ -1,0 +1,12 @@
+
+<h2><?= $this->escape($this->produto->nome) ?></h2>
+
+<p>
+    <?= $this->escape($this->produto->descricao) ?>
+</p>
+<p>
+    Preço: R$ <?= number_format($this->produto->preco, 2, ',', '.') ?>
+</p>
+<p>
+    Autor: <?= $this->escape($this->usuario->nome) ?>
+</p>

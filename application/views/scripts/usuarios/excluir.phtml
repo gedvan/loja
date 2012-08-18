@@ -1,0 +1,11 @@
+
+<h2>Excluir usuário</h2>
+
+<p>
+    Deseja realmente excluir o usuário <strong><?= $this->escape($this->usuario->nome) ?></strong>?
+</p>
+
+<form action="<?= $this->baseUrl('usuarios/excluir') ?>" method="post">
+    <input type="hidden" name="id" value="<?= $this->usuario->id_usuario ?>" />
+    <input type="submit" value="Excluir" />
+</form>

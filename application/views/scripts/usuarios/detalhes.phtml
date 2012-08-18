@@ -1,0 +1,5 @@
+
+<p>Nome: <?= $this->escape($this->usuario->nome) ?></p>
+<p>Login: <?= $this->escape($this->usuario->login) ?></p>
+<p>Data de cadastro: <?= date('d/m/Y H:i:s', strtotime($this->usuario->data_cadastro)) ?></p>
+<p>Papel: <?= $this->usuario->papel ?></p>

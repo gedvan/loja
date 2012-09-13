@@ -46,5 +46,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         Zend_Registry::set('acl', $acl);
     }
+    
+    protected function _initHelpers()
+    {
+        $this->bootstrap('FrontController');
+        Zend_Controller_Action_HelperBroker::addPath('JM/Controller/Helper', 'JM_Controller_Helper');
+    }
 }
 

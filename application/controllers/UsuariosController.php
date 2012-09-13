@@ -1,7 +1,5 @@
 <?php
 
-require_once 'JM/ControllerAdmin.php';
-
 class UsuariosController extends JM_ControllerAdmin
 {
 
@@ -56,6 +54,8 @@ class UsuariosController extends JM_ControllerAdmin
     {
         $this->_validaLogin();
         
+        $this->_helper->verificaLogin->estaLogado();
+        
         // pega o papel do usuário logado
         $papel = Zend_Auth::getInstance()->getStorage()->read()->papel;
         
@@ -65,7 +65,17 @@ class UsuariosController extends JM_ControllerAdmin
         }
         
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
-        $this->view->usuarios = $this->_tbUsuarios->fetchAll();
+        
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('paginador.phtml');
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        
+        $select = $this->_tbUsuarios->select();
+        $paginator = Zend_Paginator::factory($select);
+        $paginator->setItemCountPerPage(2);
+        $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+        $this->view->paginator = $paginator;
+        
+        $this->view->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
     }
 
     public function novoAction()
@@ -298,7 +308,7 @@ class UsuariosController extends JM_ControllerAdmin
         $this->_helper->json(array('ativo' => $usuario->ativo));
     }
 
-
+    
 }
 
 
